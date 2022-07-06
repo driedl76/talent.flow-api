@@ -1,0 +1,523 @@
+openapi: 3.0.0
+x-stoplight:
+  id: 2ct4ici4q0vir
+info:
+  title: Campaigns
+  version: '3.0'
+  description: ''
+servers:
+  - url: 'http://api.talent360.io/account/campaigns'
+paths:
+  /campaigns:
+    get:
+      summary: Get all Campaings
+      tags:
+        - Campaigns
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Campaign'
+      operationId: get-campaigns
+    post:
+      summary: Create a Campaign
+      operationId: post-campaigns
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Campaign'
+              examples: {}
+        '400':
+          description: Bad Request
+      requestBody:
+        $ref: '#/components/requestBodies/CreateCampaign'
+      description: A campaign represents an container of jobads and channels in a specific timespan.
+      tags:
+        - Campaigns
+  '/campaigns/{campaignId}/channels':
+    get:
+      summary: Get Campaign Channels
+      tags:
+        - Channels
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/CampaignChannel'
+      operationId: get-channels
+    parameters:
+      - schema:
+          type: string
+        name: campaignId
+        in: path
+        required: true
+    post:
+      summary: Create a Campaign Channel
+      operationId: post-campaigns-campaignId-channels
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CampaignChannel'
+        '400':
+          description: Bad Request
+      requestBody:
+        $ref: '#/components/requestBodies/CreateCampaignChannel'
+      tags:
+        - Channels
+  /campaigns/filter:
+    get:
+      summary: Get Campaigns by filter
+      tags:
+        - Campaigns
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Campaign'
+      operationId: get-campaigns-filter
+      x-internal: false
+    post:
+      summary: Get Campaigns by filter
+      operationId: post-campaigns-filter
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Campaign'
+      requestBody:
+        $ref: '#/components/requestBodies/GetCampaignFilter'
+      tags:
+        - Campaigns
+  '/campaigns/{campaignId}/rules':
+    parameters:
+      - schema:
+          type: string
+        name: campaignId
+        in: path
+        required: true
+    get:
+      summary: Get Campaign Rules
+      tags:
+        - Rules
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/CampaignRule'
+      operationId: get-campaigns-campaignId-rules
+  '/campaign/{campaignId}/filterSets':
+    parameters:
+      - schema:
+          type: string
+        name: campaignId
+        in: path
+        required: true
+    get:
+      summary: Get Campaign Filter Set
+      responses:
+        '200':
+          description: OK
+      operationId: get-campaign-campaignId-filterSets
+      tags:
+        - Filter Sets
+components:
+  schemas:
+    Campaign:
+      title: Campaign
+      x-stoplight:
+        id: iurvwfvpigex6
+      type: object
+      description: ''
+      x-examples:
+        example-1:
+          id: 1697
+          name: Test Kampage (07.2022)
+          startDate: '2022-07-01'
+          endDate: '2022-07-31'
+          state:
+            id: 5
+            value: Entwurf
+          account:
+            id: 197861
+            name: Personal X-perts
+          office:
+            id: 0
+            name: string
+          budget:
+            planned: 1000
+            spent: 200
+          jobadsCount:
+            current: 50
+            total: 60
+          appliesCount: 15
+          costPerApplication: 13.34
+      properties:
+        id:
+          type: integer
+          description: Campaign id
+        name:
+          type: string
+          description: Campaign name
+        startDate:
+          type: string
+          description: Start date of the campaign (CET - Berlin)
+        endDate:
+          type: string
+          description: End date of the campaign (CET - Berlin)
+        timeProgress:
+          type: number
+          description: Time progress in % from 0.0 - 100.0
+        campaignStatus:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: State id
+            name:
+              type: string
+              description: State name
+        account:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: Account id
+            name:
+              type: string
+              description: Account name
+        office:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: Office id
+            name:
+              type: string
+              description: Office name
+        budget:
+          type: object
+          properties:
+            planned:
+              type: number
+              description: Total planned budget over all channels
+            spent:
+              type: number
+              description: Total budget spent over all channels
+            progress:
+              type: number
+              description: Budget progress in % from 0.0 - 100.0
+        jobadsCount:
+          type: object
+          properties:
+            current:
+              type: integer
+              description: Current active jobsads in campaign
+            total:
+              type: integer
+              description: Total unique jobads in this campaign
+        appliesCount:
+          type: integer
+          description: Total applies in this campaign
+        costPerApplication:
+          type: number
+          description: Average cost per application
+        approval:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+            approvedBy:
+              type: string
+            approvalDate:
+              type: string
+      required:
+        - id
+        - name
+        - startDate
+        - endDate
+        - campaignStatus
+    CampaignChannel:
+      title: CampaignChannel
+      x-stoplight:
+        id: gihkdt31irod7
+      type: object
+      properties:
+        id:
+          type: integer
+        camapignId:
+          type: integer
+        channel:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        budget:
+          type: object
+          properties:
+            planned:
+              type: number
+            spent:
+              type: number
+        applyCount:
+          type: integer
+        costPerApplication:
+          type: number
+        channelParameter:
+          type: object
+          properties:
+            cpc:
+              type: number
+        indeedParameter:
+          type: object
+          properties:
+            campaignTarget:
+              type: integer
+            costPerApplication:
+              type: number
+            appliesPerJobAd:
+              type: integer
+        campaignChannelStatus:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+      required:
+        - id
+        - camapignId
+        - channel
+        - budget
+    CampaignRule:
+      title: CampaignRule
+      x-stoplight:
+        id: mm97yhzyg3n57
+      type: object
+      properties:
+        id:
+          type: integer
+        rule:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        value:
+          type: integer
+        ruleStatus:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+  requestBodies:
+    CreateCampaign:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              accountId:
+                type: integer
+                description: Account id
+              officeId:
+                type: integer
+                description: Office id
+              name:
+                type: string
+                description: Unique name of the campaign
+              startDate:
+                type: string
+                description: Start date of the campaign (YYYY-MM-DD)
+              endDate:
+                type: string
+                description: End date of the campaign (YYYY-MM-DD)
+            required:
+              - accountId
+              - name
+              - startDate
+              - endDate
+          examples: {}
+    CreateCampaignChannel:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              channelId:
+                type: integer
+              budgetPlanned:
+                type: number
+              cpc:
+                type: number
+              indeedParameter:
+                type: object
+                properties:
+                  campaignTarget:
+                    type: integer
+                  cpa:
+                    type: number
+                  appliesPerJobAd:
+                    type: integer
+    GetCampaignFilter:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              accountId:
+                type: integer
+              filter:
+                type: object
+                properties:
+                  skip:
+                    type: integer
+                  take:
+                    type: integer
+                  sortFields:
+                    type: object
+                    properties:
+                      name:
+                        type: integer
+                      endDateUtc:
+                        type: integer
+                      startDateUtc:
+                        type: integer
+                      applies:
+                        type: integer
+                      clicks:
+                        type: integer
+                      budget:
+                        type: integer
+                      cost:
+                        type: integer
+                      cpa:
+                        type: integer
+                      jobAdsLive:
+                        type: integer
+                      jobAdsOvervall:
+                        type: integer
+                  filterFields:
+                    type: object
+                    properties:
+                      id:
+                        type: object
+                        properties:
+                          value:
+                            type: integer
+                          valueTo:
+                            type: integer
+                          operation:
+                            type: integer
+                      name:
+                        type: object
+                        properties:
+                          value:
+                            type: string
+                          valueTo:
+                            type: string
+                          operation:
+                            type: integer
+                      endDateUtc:
+                        type: object
+                        properties:
+                          value:
+                            type: string
+                          valueTo:
+                            type: string
+                          operation:
+                            type: integer
+                      startDateUtc:
+                        type: object
+                        properties:
+                          value:
+                            type: string
+                          valueTo:
+                            type: string
+                          operation:
+                            type: integer
+                      officeId:
+                        type: object
+                        properties:
+                          value:
+                            type: integer
+                          valueTo:
+                            type: integer
+                          operation:
+                            type: integer
+                      campaignStage:
+                        type: object
+                        properties:
+                          value:
+                            type: integer
+                          valueTo:
+                            type: integer
+                          operation:
+                            type: integer
+            x-examples:
+              example-1:
+                accountId: 0
+                filter:
+                  skip: 0
+                  take: 0
+                  sortFields:
+                    name: 0
+                    endDateUtc: 0
+                    startDateUtc: 0
+                    applies: 0
+                    clicks: 0
+                    budget: 0
+                    cost: 0
+                    cpa: 0
+                    jobAdsLive: 0
+                    jobAdsOvervall: 0
+                  filterFields:
+                    id:
+                      value: 0
+                      valueTo: 0
+                      operation: 0
+                    name:
+                      value: string
+                      valueTo: string
+                      operation: 0
+                    endDateUtc:
+                      value: '2022-07-04T14:08:34.041Z'
+                      valueTo: '2022-07-04T14:08:34.041Z'
+                      operation: 0
+                    startDateUtc:
+                      value: '2022-07-04T14:08:34.041Z'
+                      valueTo: '2022-07-04T14:08:34.041Z'
+                      operation: 0
+                    officeId:
+                      value: 0
+                      valueTo: 0
+                      operation: 0
+                    campaignStage:
+                      value: 1
+                      valueTo: 1
+                      operation: 0
