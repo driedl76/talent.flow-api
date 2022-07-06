@@ -9,7 +9,7 @@ info:
     name: talent360 GmbH
     url: 'https://talent360.io'
   license:
-    name: MIT
+    name: talent360
     url: 'https://www.talent360.io/terms-of-use.html'
   termsOfService: 'https://www.talent360.io/terms-of-use.html'
 servers:
