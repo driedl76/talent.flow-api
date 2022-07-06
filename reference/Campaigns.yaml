@@ -8,7 +8,10 @@ info:
   contact:
     name: talent360 GmbH
     url: 'https://talent360.io'
-  license: {}
+  license:
+    name: MIT
+    url: 'https://www.talent360.io/terms-of-use.html'
+  termsOfService: 'https://www.talent360.io/terms-of-use.html'
 servers:
   - url: 'http://api.talent360.io/account/campaigns'
     description: Production
