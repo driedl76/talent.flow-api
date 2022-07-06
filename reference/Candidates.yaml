@@ -1,0 +1,11 @@
+openapi: 3.0.0
+x-stoplight:
+  id: gqp8k9iunj5fy
+info:
+  title: Candidates
+  version: '3.0'
+servers:
+  - url: 'http://api.talent360.io/account/candidates'
+paths: {}
+components:
+  schemas: {}
