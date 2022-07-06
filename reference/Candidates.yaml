@@ -6,6 +6,47 @@ info:
   version: '3.0'
 servers:
   - url: 'http://api.talent360.io/account/candidates'
-paths: {}
+paths:
+  '/export/new/{date}':
+    parameters:
+      - schema:
+          type: string
+        name: date
+        in: path
+        required: true
+    get:
+      summary: Get all new candidates by date
+      tags:
+        - Export
+      responses: {}
+      operationId: get-export-new-date
+  '/export/modified/{date}':
+    parameters:
+      - schema:
+          type: string
+        name: date
+        in: path
+        required: true
+    get:
+      summary: Get all modified Candidates by date
+      tags:
+        - Export
+      responses: {}
+      operationId: get-export-modified-date
+  '/export/deleted/{date}':
+    parameters:
+      - schema:
+          type: string
+        name: date
+        in: path
+        required: true
+    get:
+      summary: Get all Candidates to delete by date
+      tags:
+        - Export
+      responses: {}
+      operationId: get-export-deleted-date
 components:
   schemas: {}
+tags:
+  - name: Export
