@@ -138,7 +138,7 @@ paths:
                 allOf:
                   - $ref: '#/components/schemas/CampaignRule'
       operationId: get-campaigns-campaignId-rules
-  '/campaign/{campaignId}/filterSets':
+  '/campaigns/{campaignId}/filterSets':
     parameters:
       - schema:
           type: string
