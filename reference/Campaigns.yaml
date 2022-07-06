@@ -15,6 +15,12 @@ info:
 servers:
   - url: 'http://api.talent360.io/account/campaigns'
     description: Production
+tags:
+  - name: Campaigns
+  - name: Channels
+  - name: Filter Sets
+  - name: Reports
+  - name: Rules
 paths:
   /campaigns:
     get:
