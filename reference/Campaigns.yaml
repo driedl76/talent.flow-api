@@ -17,10 +17,15 @@ servers:
     description: Production
 tags:
   - name: Campaigns
+    description: 'Performance Campaings'
   - name: Channels
+    description: 'Channels of a campaign'
   - name: Filter Sets
+    description: 'Filter set of a campaign'
   - name: Reports
+    description: 'Campaign reports'
   - name: Rules
+    description: 'Rules of a campaign'
 paths:
   /campaigns:
     get:
