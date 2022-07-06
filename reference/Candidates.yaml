@@ -7,7 +7,7 @@ info:
 servers:
   - url: 'http://api.talent360.io/account/candidates'
 paths:
-  '/export/new/{date}':
+  '/export/candidates/new/{date}':
     parameters:
       - schema:
           type: string
@@ -20,7 +20,7 @@ paths:
         - Export
       responses: {}
       operationId: get-export-new-date
-  '/export/modified/{date}':
+  '/export/candidates/modified/{date}':
     parameters:
       - schema:
           type: string
@@ -33,7 +33,7 @@ paths:
         - Export
       responses: {}
       operationId: get-export-modified-date
-  '/export/deleted/{date}':
+  '/export/candidates/deleted/{date}':
     parameters:
       - schema:
           type: string
@@ -46,6 +46,54 @@ paths:
         - Export
       responses: {}
       operationId: get-export-deleted-date
+  '/export/documents/new/{date}':
+    parameters:
+      - schema:
+          type: string
+        name: date
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-export-documents-new-date
+  '/export/documents/modified/{date}':
+    parameters:
+      - schema:
+          type: string
+        name: date
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-export-documents-modified-date
+  '/export/documents/deleted/{date}':
+    parameters:
+      - schema:
+          type: string
+        name: date
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-export-documents-deleted-date
+  '/export/documents/{documentId}':
+    parameters:
+      - schema:
+          type: string
+        name: documentId
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-export-documents-documentId
 components:
   schemas: {}
 tags:
