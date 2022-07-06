@@ -5,8 +5,13 @@ info:
   title: Campaigns
   version: '3.0'
   description: ''
+  contact:
+    name: talent360 GmbH
+    url: 'https://talent360.io'
+  license: {}
 servers:
   - url: 'http://api.talent360.io/account/campaigns'
+    description: Production
 paths:
   /campaigns:
     get:
