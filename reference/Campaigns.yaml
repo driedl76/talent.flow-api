@@ -253,12 +253,16 @@ components:
           properties:
             id:
               type: integer
+              description: Approval Id
             name:
               type: string
+              description: Approval name
             approvedBy:
               type: string
+              description: Approved by Firstname and Lastname
             approvalDate:
               type: string
+              description: Date of approval
       required:
         - id
         - name
@@ -273,47 +277,61 @@ components:
       properties:
         id:
           type: integer
+          description: Id
         camapignId:
           type: integer
+          description: Campaign Id
         channel:
           type: object
           properties:
             id:
               type: integer
+              description: Channel Id
             name:
               type: string
+              description: Channel Name
         budget:
           type: object
           properties:
             planned:
               type: number
+              description: Planned Budget for Channel
             spent:
               type: number
+              description: Money Spent for Channel
         applyCount:
           type: integer
+          description: Total applications
         costPerApplication:
           type: number
+          description: Average cost per application
         channelParameter:
           type: object
           properties:
             cpc:
               type: number
+              description: Cost per click
         indeedParameter:
           type: object
           properties:
             campaignTarget:
               type: integer
+              description: Campaign Target (Indeed only)
             costPerApplication:
               type: number
+              description: Cost per application (Indeed only)
             appliesPerJobAd:
               type: integer
+              description: Maximum applies per JobAd (Indeed only)
         campaignChannelStatus:
           type: object
           properties:
             id:
               type: integer
+              description: Campaing Channel Status Id
             name:
               type: string
+              description: Campaing Channel Status Name
       required:
         - id
         - camapignId
@@ -327,22 +345,28 @@ components:
       properties:
         id:
           type: integer
+          description: Id
         rule:
           type: object
           properties:
             id:
               type: integer
+              description: Rule Id
             name:
               type: string
+              description: Rule name
         value:
           type: integer
+          description: Rule value
         ruleStatus:
           type: object
           properties:
             id:
               type: integer
+              description: Rule status Id
             name:
               type: string
+              description: Rule status name
   requestBodies:
     CreateCampaign:
       content:
